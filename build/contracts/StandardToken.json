@@ -1,0 +1,127 @@
+{
+  "contract_name": "StandardToken",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_spender",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "supply",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "remaining",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000c57fe5b5b6101d28061001c6000396000f3006060604052361561005c5763ffffffff60e060020a600035041663095ea7b3811461005e57806318160ddd1461009157806323b872dd146100b3578063722713f714610091578063a9059cbb1461005e578063dd62ed3e14610141575bfe5b341561006657fe5b61007d600160a060020a0360043516602435610175565b604080519115158252519081900360200190f35b341561009957fe5b6100a161017e565b60408051918252519081900360200190f35b34156100bb57fe5b61007d600160a060020a0360043581169060243516604435610184565b604080519115158252519081900360200190f35b341561009957fe5b6100a161017e565b60408051918252519081900360200190f35b341561006657fe5b61007d600160a060020a0360043516602435610175565b604080519115158252519081900360200190f35b341561014957fe5b6100a1600160a060020a0360043581169060243516610175565b60408051918252519081900360200190f35b60005b92915050565b60005b90565b60005b9392505050565b60005b90565b60005b92915050565b60005b929150505600a165627a7a72305820f4538156769d9d87d6c06d3c79b0af85b561aa2d14105f0ae86041f73e2d198a0029",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1505235213824
+}
