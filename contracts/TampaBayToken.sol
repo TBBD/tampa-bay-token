@@ -2,20 +2,30 @@ pragma solidity ^0.4.11;
 
 contract TampaBayToken {
 
-
+  // ERC20 state
   mapping (address => uint256) balances;
-  mapping (address => mapping (address => uint256)) allowed;
+  mapping (address => mapping (address => uint256)) allowances;
+  uint256 public totalSupply;
 
-  string public name = "Tampa Bay Token";
-  string public symbol = "TBT";
-  uint8 public decimals = 18;
-  uint256 public totalSupply = 1000000 ether;
+  // Human state
+  string public name;
+  string public symbol;
+  uint8 public decimals;
+  string public version;
 
+  // Events
   event Transfer (address indexed _from, address indexed _to, uint256 _value);
   event Approval (address indexed _owner, address indexed _spender, uint256 _value);
 
   function TampaBayToken() {
     // constructor
+    name = "Tampa Bay Token";
+    symbol = "TBT";
+    decimals = 18;
+    version = "0.1";
+
+    totalSupply = 1000000000 ether;
+
     balances[msg.sender] = totalSupply;
   }
 
@@ -23,44 +33,37 @@ contract TampaBayToken {
     return balances[_owner];
   }
 
-  function transfer (address _to, uint256 _value) returns (bool success) {
-    if (balances[msg.sender] >= _value
-        && balances[_to] + _value > balances[_to]) {
-      balances[msg.sender] -= _value;
-      balances[_to] += _value;
-      Transfer(msg.sender, _to, _value);
-      return true;
-    } else { return false; }
+  function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
+    return allowances[_owner][_spender];
   }
 
-  function transferFrom(address _from, address _to, uint _value) returns (bool success) {
-    if(balances[_from] >= _value
-        && _value > 0
-        && balances[_to] + _value > balances[_to]
-        && allowed[_from][msg.sender] >= _value) {
+  function transfer (address _to, uint256 _value) returns (bool success) {
 
-        balances[_from] -= _value;
-        balances[_to] += _value;
-        Transfer(_from, _to, _value);
-
-        return true;
-    }
-    return false;
-}
+    if(balances[msg.sender] < _value) revert();
+    if(balances[_to] + _value < balances[_to]) revert();
+    balances[msg.sender] -= _value;
+    balances[_to] += _value;
+    Transfer(msg.sender, _to, _value);
+    return true;
+  }
 
   function approve(address _spender, uint256 _value) returns (bool success) {
-    allowed[msg.sender][_spender] = _value;
+    allowances[msg.sender][_spender] = _value;
     Approval(msg.sender, _spender, _value);
     return true;
   }
 
-  function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
-    return allowed[_owner][_spender];
-  }
+  function transferFrom(address _owner, address _to, uint _value) returns (bool success) {
 
-  function totalSupply() constant returns(uint) {
-        return totalSupply;
-    }
+    if (balances[_owner] < _value) revert();
+    if (balances[_to] + _value < balances[_to]) revert();
+    if (allowances[_owner][msg.sender] < _value) revert();
+    balances[_owner] -= _value;
+    balances[_to] += _value;
+    allowances[_owner][msg.sender] -= _value;
+    Transfer(_owner, _to, _value);
+    return true;
+  }
 
   function() {
     revert();
